@@ -28,6 +28,14 @@ body {
   padding-bottom: 20px;
 }
 
+.form-container {
+  border: 2px solid #007bff;  /* Blue border */
+  padding: 20px;
+  border-radius: 8px;  /* Rounded corners */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);  /* Slight shadow */
+}
+
+
 .navbar {
   margin-bottom: 20px;
 }

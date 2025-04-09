@@ -20,6 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $street = $_POST['street'];
     $city = $_POST['city'];
     $postcode = $_POST['postcode'];
+    $teacher_email = $_POST['teacher_email'];
     $teacher_telephone = $_POST['teacher_telephone'];
     $annual_salary = $_POST['annual_salary'];
     $background_check = isset($_POST['background_check']) ? 1 : 0; // Handle checkbox for background check
@@ -67,8 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // Insert into the teachers table
 
-        $sql3 = "INSERT INTO teachers (first_name, last_name, address_id, teacher_telephone, annual_salary, background_check, class, birth_date, sex, working_hours, educational_qualifications)
-                VALUES (:first_name, :last_name, :address_id, :teacher_telephone, :annual_salary, :background_check, :class, :birth_date, :sex, :working_hours, :educational_qualifications)";
+        $sql3 = "INSERT INTO teachers (first_name, last_name, address_id, teacher_email, teacher_telephone, annual_salary, background_check, class, birth_date, sex, working_hours, educational_qualifications)
+                VALUES (:first_name, :last_name, :address_id, :teacher_email, :teacher_telephone, :annual_salary, :background_check, :class, :birth_date, :sex, :working_hours, :educational_qualifications)";
         
         $stmt3 = $pdo->prepare($sql3);
         
@@ -76,6 +77,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt3->bindParam(':first_name', $first_name);
         $stmt3->bindParam(':last_name', $last_name);
         $stmt3->bindParam(':address_id', $address_id);
+        $stmt3->bindParam(':teacher_email', $teacher_email);
         $stmt3->bindParam(':teacher_telephone', $teacher_telephone);
         $stmt3->bindParam(':annual_salary', $annual_salary);
         $stmt3->bindParam(':background_check', $background_check);
@@ -163,8 +165,9 @@ try {
 
 <body>
     <main class="form-signin w-100 m-auto">
+    <div class="form-container">
       <form action="teachers_add.php" method="POST">
-        <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+        <img class="mb-4" src="../assets/brand/logo.png" alt="" width="72" height="57">
         <h1 class="h3 mb-3 fw-normal">Add New Teacher</h1>
     
         <!-- First Name -->
@@ -178,29 +181,11 @@ try {
           <input type="text" class="form-control" id="last_name" name="last_name" placeholder="Last Name" required>
           <label for="lastName">Last Name</label>
         </div>
-    
-        <!-- House Number -->
+
+        <!-- Teacher Email -->
         <div class="form-floating">
-          <input type="text" class="form-control" id="houseNumber" name="house_number" placeholder="House Number" required>
-          <label for="houseNumber">House Number</label>
-        </div>
-  
-        <!-- Street -->
-        <div class="form-floating">
-          <input type="text" class="form-control" id="street" name="street" placeholder="Street" required>
-          <label for="street">Street</label>
-        </div>
-  
-        <!-- City -->
-        <div class="form-floating">
-          <input type="text" class="form-control" id="city" name="city" placeholder="City" required>
-          <label for="city">City</label>
-        </div>
-  
-        <!-- Postcode -->
-        <div class="form-floating">
-          <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Postcode" required>
-          <label for="postcode">Postcode</label>
+          <input type="text" class="form-control" id="teacher_email" name="teacher_email" placeholder="Teacher Email" required>
+          <label for="teacherEmail">Teacher Email</label>
         </div>
     
         <!-- Teacher Telephone -->
@@ -263,13 +248,44 @@ try {
           <textarea class="form-control" id="educationQualifications" name="educational_qualifications" placeholder="Educational Qualifications" required></textarea>
           <label for="educationQualifications">Educational Qualifications</label>
         </div>
-    
-        <!-- Submit Button -->
-        <button class="btn btn-primary w-100 py-2" type="submit">Add Teacher</button>
-    
-        <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
-      </form>
+      </div>
+
     </main>    
+
+  <main class="form-signin w-100 m-auto">
+  <div class="form-container">
+    <!-- House Number -->
+    <div class="form-floating">
+      <input type="text" class="form-control" id="houseNumber" name="house_number" placeholder="House Number" required>
+      <label for="houseNumber">House Number</label>
+    </div>
+
+    <!-- Street -->
+    <div class="form-floating">
+      <input type="text" class="form-control" id="street" name="street" placeholder="Street" required>
+      <label for="street">Street</label>
+    </div>
+
+    <!-- City -->
+    <div class="form-floating">
+      <input type="text" class="form-control" id="city" name="city" placeholder="City" required>
+      <label for="city">City</label>
+    </div>
+
+    <!-- Postcode -->
+    <div class="form-floating">
+      <input type="text" class="form-control" id="postcode" name="postcode" placeholder="Postcode" required>
+      <label for="postcode">Postcode</label>
+    </div>
+  </div>
+
+    <!-- Submit Button -->
+    <button class="btn btn-primary w-100 py-2" type="submit">Add Teacher</button>
+
+    <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
+  
+  </main>
+ 
 
 </body>
 </html>

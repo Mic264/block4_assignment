@@ -90,6 +90,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["teacherid"]))
         <th>first_name</th>  <!-- Table header for first_name -->
         <th>last_name</th>  <!-- Table header for last_name -->
         <th>address_id</th>  <!-- Table header for address_id -->
+        <th>teacher_email</th>  <!-- Table header for teacher_email -->
         <th>teacher_telephone</th>  <!-- Table header for teacher_telephone -->
         <th>annual_salary</th>  <!-- Table header for annual_salary -->
         <th>background_check</th>  <!-- Table header for background_check -->
@@ -112,6 +113,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["teacherid"]))
                 <td>" . htmlspecialchars($row['first_name']) . "</td>  <!-- Display first_name -->
                 <td>" . htmlspecialchars($row['last_name']) . "</td>  <!-- Display last_name -->
                 <td>" . htmlspecialchars($row['address_id']) . "</td>  <!-- Display address_id -->
+                <td>" . htmlspecialchars($row['teacher_email']) . "</td>  <!-- Display teacher_email -->
                 <td>" . htmlspecialchars($row['teacher_telephone']) . "</td>  <!-- Display teacher_telephone -->
                 <td>" . htmlspecialchars($row['annual_salary']) . "</td>  <!-- Display annual_salary -->
                 <td>" . ($row['background_check'] ? 'Yes' : 'No') . "</td>  <!-- Display background_check -->

@@ -1,7 +1,4 @@
-CREATE TABLE class_year (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    class VARCHAR(30) NOT NULL
-);
+USE school_management_system;
 
 INSERT INTO class_year(class) VALUE('Reception Year');
 INSERT INTO class_year(class) VALUE('Year One');

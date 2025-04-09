@@ -84,24 +84,24 @@ try {
     <div class="dropdown">
         <button>Pupil</button>
         <div class="dropdown-content">
-            <a href="pupils.php">Add</a>
-            <a href="#">View All</a>
+            <a href="pupils_add.php">Add</a>
+            <a href="pupils_view.php">View All</a>
         </div>
     </div>
 
     <div class="dropdown">
         <button>Parent</button>
         <div class="dropdown-content">
-            <a href="parentguardians.php">Add</a>
-            <a href="#">View All</a>
+            <a href="parent_guardians_add.php">Add</a>
+            <a href="parent_guardians_view.php">View All</a>
         </div>
     </div>
 
     <div class="dropdown">
         <button>Teacher</button>
         <div class="dropdown-content">
-            <a href="teachers.php">Add</a>
-            <a href="#">View All</a>
+            <a href="teachers_add.php">Add</a>
+            <a href="teachers_view.php">View All</a>
         </div>
     </div>
 
@@ -116,8 +116,9 @@ try {
 
 <body>
     <main class="form-signin w-100 m-auto">
+    <div class="form-container">
     <form action="classes_add.php" method="POST">
-      <img class="mb-4" src="../assets/brand/bootstrap-logo.svg" alt="" width="72" height="57">
+    <img class="mb-4" src="../assets/brand/logo.png" alt="" width="72" height="57">
       <h1 class="h3 mb-3 fw-normal">Add a Class</h1>
 
       <!-- Class Year -->
@@ -169,12 +170,14 @@ try {
         </select>
         <label for="teacher_id">Teacher</label>
       </div>
+    </div>
 
       <!-- Submit Button -->
       <button class="btn btn-primary w-100 py-2" type="submit">Add Class</button>
 
       <p class="mt-5 mb-3 text-body-secondary">&copy; 2017–2024</p>
     </form>
+
 
 </body>
 </html>
