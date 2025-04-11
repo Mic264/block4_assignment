@@ -12,22 +12,6 @@ try {
     exit();  // Stop further script execution if the connection fails
 }
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["teacherid"]))
-    {
-        $teacherID = $_POST["teacherid"];
-        // Prepare the DELETE query to remove the teacher by its ID
-        $query = "DELETE FROM teachers WHERE id = :teacherID";
-        $stmt = $pdo->prepare($query);
-        $stmt->bindParam(':teacherID', $teacherID, PDO::PARAM_INT);
-
-        // Execute the query and check if it was successful
-        if ($stmt->execute()) {
-            alert("Teacher deleted successfully");
-        } else {
-            alert("Delete failed");
-        }
-    }
-
 CloseCon();
 
 ?>
@@ -88,61 +72,40 @@ CloseCon();
     </div>
   </header>
 
-
 <body>
 
-    <h2>Teachers</h2>
-    <p>WARNING: You cannot delete a teacher that has a class (regardless of if it shows in this table or not)</p>
-    
+    <h2>Parents/guardians</h2>
     <table border="1">
     <tr>
-        <th>teacher_id</th>  <!-- Table header for teacher_id -->
+        <th>parent_guardian_id</th>  <!-- Table header for parent_guardian_id -->
         <th>first_name</th>  <!-- Table header for first_name -->
         <th>last_name</th>  <!-- Table header for last_name -->
+        <th>guardian_email</th>  <!-- Table header for guardian_email -->
+        <th>guardian_telephone</th>  <!-- Table header for guardian_telephone -->
         <th>address_id</th>  <!-- Table header for address_id -->
-        <th>teacher_email</th>  <!-- Table header for teacher_email -->
-        <th>teacher_telephone</th>  <!-- Table header for teacher_telephone -->
-        <th>annual_salary</th>  <!-- Table header for annual_salary -->
-        <th>background_check</th>  <!-- Table header for background_check -->
-        <th>class</th>  <!-- Table header for class -->
-        <th>birth_date</th>  <!-- Table header for birth_date -->
-        <th>sex</th>  <!-- Table header for sex -->
-        <th>working_hours</th>  <!-- Table header for working_hours -->
-        <th>educational_qualifications</th>  <!-- Table header for educational_qualifications -->
-        <th>actions</th>  <!-- Table header for actions e.g. delete -->
+        <th>created_at</th>  <!-- Table header for created_at -->
+        <th>updated_at</th>  <!-- Table header for updated_at -->
     </tr>
     <?php
-    // Fetch all teachers from the database ordered by teacher_id
-    $sql = "SELECT * FROM teachers ORDER BY id";
+    // Fetch all parent guardians from the database ordered by parent_guardian_id
+    $sql = "SELECT * FROM parent_guardians ORDER BY id";
     $stmt = $pdo->query($sql);  // Execute the query
 
     // Loop through the results and display them in the table
     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         echo "<tr>
-                <td>" . htmlspecialchars($row['id']) . "</td>  <!-- Display teacher_id -->
+                <td>" . htmlspecialchars($row['id']) . "</td>  <!-- Display parent_guardian_id -->
                 <td>" . htmlspecialchars($row['first_name']) . "</td>  <!-- Display first_name -->
                 <td>" . htmlspecialchars($row['last_name']) . "</td>  <!-- Display last_name -->
+                <td>" . htmlspecialchars($row['guardian_email']) . "</td>  <!-- Display guardian_email -->
+                <td>" . htmlspecialchars($row['guardian_telephone']) . "</td>  <!-- Display guardian_telephone -->
                 <td>" . htmlspecialchars($row['address_id']) . "</td>  <!-- Display address_id -->
-                <td>" . htmlspecialchars($row['teacher_email']) . "</td>  <!-- Display teacher_email -->
-                <td>" . htmlspecialchars($row['teacher_telephone']) . "</td>  <!-- Display teacher_telephone -->
-                <td>" . htmlspecialchars($row['annual_salary']) . "</td>  <!-- Display annual_salary -->
-                <td>" . ($row['background_check'] ? 'Yes' : 'No') . "</td>  <!-- Display background_check -->
-                <td>" . htmlspecialchars($row['class']) . "</td>  <!-- Display class -->
-                <td>" . htmlspecialchars($row['birth_date']) . "</td>  <!-- Display birth_date -->
-                <td>" . htmlspecialchars($row['sex']) . "</td>  <!-- Display sex -->
-                <td>" . htmlspecialchars($row['working_hours']) . "</td>  <!-- Display working_hours -->
-                <td>" . htmlspecialchars($row['educational_qualifications']) . "</td>  <!-- Display educational_qualifications -->
-                <td>
-                    <!-- Delete button form for each teacher -->
-                    <form method='POST'>
-                        <input type='hidden' name='teacherid' value='" . htmlspecialchars($row['id']) . "' />
-                        <input type='submit' onclick='return confirm(\"This teacher will be permanently deleted and cannot be recovered. Are you sure?\")' value='Delete' />
-                    </form>
-                </td>
+                <td>" . htmlspecialchars($row['created_at']) . "</td>  <!-- Display created_at -->
+                <td>" . htmlspecialchars($row['updated_at']) . "</td>  <!-- Display updated_at -->
               </tr>";
     }
     ?>
-</table>
+    </table>
 
 </body>
 </html>

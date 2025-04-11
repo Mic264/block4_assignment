@@ -13,7 +13,7 @@ USE school_management_system;
 
 CREATE TABLE IF NOT EXISTS class_year (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    class VARCHAR(30) UNIQUE NOT NULL
+    class VARCHAR(30) NOT NULL UNIQUE
 );
 
 CREATE TABLE IF NOT EXISTS addresses (
@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS teachers (
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     address_id INT,
-    teacher_email VARCHAR(255) UNIQUE NOT NULL,  
+    teacher_email VARCHAR(255) NOT NULL UNIQUE,  
     teacher_telephone VARCHAR(20) NOT NULL, 
     annual_salary DECIMAL(10, 2) NOT NULL,
     background_check BOOLEAN NOT NULL,
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS teachers (
 CREATE TABLE IF NOT EXISTS classes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     class VARCHAR(15) NOT NULL,  
-    class_name VARCHAR(30) UNIQUE NOT NULL,
+    class_name VARCHAR(30) NOT NULL UNIQUE,
     building VARCHAR(50) NOT NULL,
     capacity INT NOT NULL,
     current_capacity INT NOT NULL CHECK (current_capacity <= capacity),
@@ -62,7 +62,7 @@ CREATE TABLE IF NOT EXISTS parent_guardians (
     id INT AUTO_INCREMENT PRIMARY KEY,
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
-    guardian_email VARCHAR(255) UNIQUE NOT NULL,   
+    guardian_email VARCHAR(255) NOT NULL UNIQUE,   
     guardian_telephone VARCHAR(20) NOT NULL, 
     address_id INT,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,  
@@ -75,26 +75,18 @@ CREATE TABLE IF NOT EXISTS pupils (
     first_name VARCHAR(100) NOT NULL,
     last_name VARCHAR(100) NOT NULL,
     address_id INT,  
+    parent_one INT,
+    parent_two INT,
     medical_information TEXT,  
     class_name varchar(50), 
     birth_date DATE NOT NULL,
     sex VARCHAR(10) NOT NULL,  
-    pupil_email VARCHAR(255) UNIQUE NOT NULL,  
-    pupil_ID INT UNIQUE NOT NULL,  
-    parent_one VARCHAR(100) NOT NULL,
-    parent_two VARCHAR(100) NOT NULL,
+    pupil_email VARCHAR(255) NOT NULL UNIQUE,  
+    pupil_ID VARCHAR(10) NOT NULL UNIQUE, 
     contact_number VARCHAR(25) NOT NULL,  
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,  
     updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (address_id) REFERENCES addresses(id)
-);
-
-CREATE TABLE IF NOT EXISTS pupil_parent_guardian (
-    pupil_id INT,
-    parent_guardian_id INT,
-    PRIMARY KEY (pupil_id, parent_guardian_id),
-    created DATETIME DEFAULT CURRENT_TIMESTAMP,  
-    last_updated DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    FOREIGN KEY (pupil_id) REFERENCES pupils(id),
-    FOREIGN KEY (parent_guardian_id) REFERENCES parent_guardians(id)
+    FOREIGN KEY (address_id) REFERENCES addresses(id),
+    FOREIGN KEY (parent_one) REFERENCES parent_guardians(id),
+    FOREIGN KEY ( parent_two) REFERENCES parent_guardians(id)
 );

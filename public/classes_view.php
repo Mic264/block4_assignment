@@ -1,13 +1,14 @@
 <?php
 
 include '../scr/php/db_connection.php';  // Include the database connection file
+include '../scr/php/utils.php';  // Include the utilities file
 
 try {
     // Attempt to establish a connection to the database using PDO (PHP Data Objects)
     $pdo = OpenCon();  // Call the OpenCon function to get the connection object
 } catch (PDOException $e) {
     // If the connection fails, display an error message
-    echo "Connection failed: " . $e->getMessage();
+    alert("Connection failed: " . $e->getMessage());
     exit();  // Stop further script execution if the connection fails
 }
 
@@ -21,11 +22,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["classid"]))
 
         // Execute the query and check if it was successful
         if ($stmt->execute()) {
-            echo("Class deleted successfully");
+            alert("Class deleted successfully");
         } else {
-            echo("Delete failed");
+            alert("Delete failed");
         }
     }
+
+CloseCon();
 
 ?>
 
@@ -48,6 +51,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["classid"]))
       <h3 class="float-md-start mb-0">St Alphonsus Primary School</h3>
       <nav class="nav nav-masthead justify-content-center float-md-end">
     <div class="dropdown">
+        <button>Home</button>
+        <div class="dropdown-content">
+            <a href="index.php">Return to home Page</a>
+        </div>
+    </div>
+    <div class="dropdown">
         <button>Pupil</button>
         <div class="dropdown-content">
             <a href="pupils_add.php">Add</a>
@@ -58,7 +67,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["classid"]))
     <div class="dropdown">
         <button>Parent</button>
         <div class="dropdown-content">
-            <a href="parent_guardians_add.php">Add</a>
             <a href="parent_guardians_view.php">View All</a>
         </div>
     </div>
